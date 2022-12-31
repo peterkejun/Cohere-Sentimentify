@@ -1,0 +1,14 @@
+{
+    "compilerOptions": {
+        "module": "commonjs",
+        "target": "es2015",
+        "declaration": true,
+        "outDir": "./dist",
+        "noImplicitAny": true,
+        "removeComments": true,
+        "preserveConstEnums": true,
+        "sourceMap": true
+    },
+    "include": ["src/**/*.ts", "src/sentiment"],
+    "exclude": ["**/*.spec.ts"]
+}
