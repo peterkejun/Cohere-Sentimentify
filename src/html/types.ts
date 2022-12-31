@@ -1,4 +1,4 @@
-import { Node } from "node-html-parser";
+import { HTMLElement, Node } from "node-html-parser";
 import { Color } from "./colors";
 
 export interface NodeWithID {
@@ -13,5 +13,6 @@ export interface ColorConstructorOptions {
 }
 
 export interface RenderHtmlOptions {
-    color: Color,
+    newElement: HTMLElement,
+    oldNode: Node,
 }

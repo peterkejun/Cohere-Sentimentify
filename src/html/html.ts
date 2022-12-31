@@ -1,7 +1,7 @@
 import { HTMLElement, Node, NodeType, parse } from 'node-html-parser';
-import { NodeWithID } from './types';
+import { NodeWithID, RenderHtmlOptions } from './types';
 
-class HtmlParser {
+export class HtmlParser {
     private root: HTMLElement;
 
     constructor(html: string) {
@@ -23,32 +23,40 @@ class HtmlParser {
         }
         return dfs(this.root);
     }
-}
 
-const isInterestingNode = (node: Node): boolean => {
-    if (node.nodeType !== NodeType.TEXT_NODE) {
-        return false;
-    }
-    if (node.text.trim().length === 0) {
-        return false;
-    }
-    return true;
-}
-
-export const parseHtml = (html: string): NodeWithID[] => {
-    const parser = new HtmlParser(html);
-    const generator = parser.generator();
-    
-    let iter = generator.next();
-    const texts: NodeWithID[] = [];
-    while (!iter.done) {
-        const nodeWithId = iter.value as NodeWithID;
-        iter = generator.next();
-        const { id, node } = nodeWithId;
-        if (isInterestingNode(node)) {
-            texts.push(nodeWithId);
+    modifyHtml(options: Map<Node, HTMLElement>) {
+        const dfs = (node: Node) => {
+            if (options.has(node)) {
+                node.parentNode.exchangeChild(node, options.get(node));
+            } else {
+                for (let child of node.childNodes) {
+                    dfs(child);
+                }
+            }
         }
+        dfs(this.root);
     }
-    
-    return texts;
+
+    getHtml(): string {
+        return this.root.outerHTML;
+    }
+
+    filterHtml(filter: (node: Node) => boolean): NodeWithID[] {
+        const generator = this.generator();
+        
+        let iter = generator.next();
+        const texts: NodeWithID[] = [];
+        while (!iter.done) {
+            const nodeWithId = iter.value as NodeWithID;
+            iter = generator.next();
+            const { id, node } = nodeWithId;
+            if (filter(node)) {
+                texts.push(nodeWithId);
+            }
+        }
+        
+        return texts;
+    }
 }
+
+
