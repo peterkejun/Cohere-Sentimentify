@@ -3,6 +3,7 @@ import { getColorOfSentiment } from "./html/colors";
 import { HtmlParser } from "./html/html";
 import { breakIntoSentences } from "./html/sentence";
 import { getSentiments } from "./sentiment/sentiment";
+export { intialize } from './cohere/cohere';
 
 const isInterestingNode = (node: Node): boolean => {
     if (node.nodeType !== NodeType.TEXT_NODE) {

@@ -1,14 +1,18 @@
 {
-  "scripts": {
-    "test": "tsc && node dist/test.js"
-  },
+  "name": "cohere-sentimentify",
+  "version": "1.0.0",
+  "description": "Colorize HTML texts by analyzing each sentence's sentiment using Cohere NLP model.",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "files": [
+    "/dist"
+  ],
   "devDependencies": {
     "@types/node": "^18.11.18",
     "typescript": "^4.9.4"
   },
   "dependencies": {
     "cohere-ai": "^5.0.2",
-    "dotenv": "^16.0.3",
     "node-html-parser": "^6.1.4",
     "wink-eng-lite-web-model": "^1.4.3",
     "wink-nlp": "^1.13.0"
