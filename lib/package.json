@@ -1,6 +1,6 @@
 {
   "name": "cohere-sentimentify",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Colorize HTML texts by analyzing each sentence's sentiment using Cohere NLP model.",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
